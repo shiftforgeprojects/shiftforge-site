@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ShiftForge — small, fair, honest software</title>
+<meta name="description" content="ShiftForge is an independent software studio building small, fair, honest tools for everyday life. Made by one person, in the open, from Bengaluru. See the work.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+  :root{
+    --bg:#F7F8F6; --surface:#FFFFFF; --ink:#15171C; --muted:#5B616B; --faint:#8B909A; --line:#E7E9E5;
+    --indigo:#3B3FD6; --indigo-deep:#2A2EB0; --wash:#ECEDFC; --pine:#1E6B47; --rested:#2C8577; --owe:#B4761E;
+    --disp:'Bricolage Grotesque',system-ui,sans-serif; --body:'Plus Jakarta Sans',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px;}
+  a{color:inherit;text-decoration:none;}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--body);font-weight:600;font-size:15px;border-radius:12px;padding:13px 22px;border:1.5px solid transparent;cursor:pointer;transition:.16s;}
+  .btn-primary{background:var(--indigo);color:#fff;}.btn-primary:hover{background:var(--indigo-deep);}
+  .btn-ghost{border-color:var(--line);color:var(--ink);background:var(--surface);}.btn-ghost:hover{border-color:var(--indigo);color:var(--indigo);}
+
+  nav{position:sticky;top:0;z-index:20;background:rgba(247,248,246,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+  nav .row{display:flex;align-items:center;justify-content:space-between;height:68px;}
+  .brand{display:flex;align-items:center;gap:11px;font-family:var(--disp);font-weight:700;font-size:20px;letter-spacing:-.01em;}
+  .navlinks{display:flex;gap:28px;align-items:center;font-size:15px;font-weight:500;}
+  .navlinks a{color:var(--muted);}.navlinks a:hover{color:var(--ink);}
+  @media(max-width:680px){.navlinks a:not(.navcta){display:none;}}
+  .navcta{color:var(--indigo)!important;font-weight:600;}
+
+  .hero{padding:96px 0 72px;max-width:760px;}
+  .eyebrow{display:inline-block;font-size:13px;font-weight:600;color:var(--indigo);background:var(--wash);padding:6px 12px;border-radius:999px;margin-bottom:22px;}
+  .hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(40px,7vw,68px);line-height:1.02;letter-spacing:-.03em;margin-bottom:22px;}
+  .hero p{font-size:clamp(17px,2.2vw,20px);color:var(--muted);max-width:56ch;margin-bottom:32px;}
+  .cta{display:flex;gap:13px;flex-wrap:wrap;}
+  .reveal{opacity:0;transform:translateY(14px);animation:rise .7s cubic-bezier(.22,1,.36,1) forwards;}
+  .reveal.d1{animation-delay:.06s;}.reveal.d2{animation-delay:.14s;}.reveal.d3{animation-delay:.22s;}
+  @keyframes rise{to{opacity:1;transform:none;}}
+
+  section{padding:64px 0;border-top:1px solid var(--line);}
+  .kicker{font-size:14px;font-weight:700;color:var(--indigo);margin-bottom:12px;}
+  .sec-h{font-family:var(--disp);font-weight:600;font-size:clamp(26px,4vw,38px);letter-spacing:-.02em;margin-bottom:14px;}
+  .lead{color:var(--muted);font-size:17px;max-width:60ch;margin-bottom:40px;}
+
+  /* work showcase */
+  .project{display:grid;grid-template-columns:1.05fr .95fr;gap:0;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--surface);}
+  @media(max-width:800px){.project{grid-template-columns:1fr;}}
+  .project .info{padding:34px;}
+  .ptag{font-size:12.5px;font-weight:700;color:var(--indigo);letter-spacing:.02em;margin-bottom:12px;}
+  .project h3{font-family:var(--disp);font-weight:700;font-size:30px;letter-spacing:-.01em;margin-bottom:10px;}
+  .project .tagline{font-size:16.5px;color:var(--ink);font-weight:500;margin-bottom:8px;}
+  .project p{color:var(--muted);font-size:15.5px;margin-bottom:22px;max-width:46ch;}
+  .plinks{display:flex;gap:20px;align-items:center;font-weight:600;font-size:15px;}
+  .plinks a{color:var(--indigo);}.plinks a:hover{text-decoration:underline;}
+  .pvisual{background:#EEF2EA;padding:34px;display:flex;flex-direction:column;justify-content:center;gap:13px;}
+  .pv-h{font-family:var(--disp);font-weight:600;color:var(--pine);font-size:16px;margin-bottom:4px;}
+  .brow{display:flex;align-items:center;gap:10px;}
+  .bn{width:52px;font-size:13px;font-weight:700;color:#16231C;flex:0 0 auto;}
+  .bt{position:relative;flex:1;height:14px;background:#fff;border-radius:99px;overflow:hidden;}
+  .bf{height:100%;border-radius:99px;}
+  .fl{position:absolute;top:-2px;bottom:-2px;left:60%;width:2px;background:#16231C;opacity:.22;}
+  .bl{width:82px;text-align:right;font-size:11px;font-weight:700;flex:0 0 auto;}
+  .more{margin-top:16px;border:1px dashed var(--line);border-radius:16px;padding:22px;color:var(--muted);font-size:15px;}
+  .more b{color:var(--ink);}
+
+  .approach{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;}
+  @media(max-width:760px){.approach{grid-template-columns:1fr;gap:24px;}}
+  .ap h3{font-family:var(--disp);font-weight:600;font-size:20px;margin-bottom:8px;}
+  .ap h3 span{color:var(--indigo);}
+  .ap p{color:var(--muted);font-size:15px;}
+
+  .about{display:grid;grid-template-columns:.8fr 1.4fr;gap:40px;align-items:start;}
+  @media(max-width:760px){.about{grid-template-columns:1fr;gap:16px;}}
+  .about .who{font-family:var(--disp);font-weight:600;font-size:20px;}
+  .about .where{color:var(--faint);font-size:14px;margin-top:4px;}
+  .about p{color:var(--muted);font-size:16.5px;margin-bottom:15px;}
+  .about p strong{color:var(--ink);font-weight:600;}
+
+  .contact{text-align:center;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:48px 24px;}
+  .contact h2{font-family:var(--disp);font-weight:600;font-size:clamp(26px,4vw,34px);margin-bottom:12px;letter-spacing:-.01em;}
+  .contact p{color:var(--muted);font-size:16px;max-width:48ch;margin:0 auto 22px;}
+  .mail{font-family:var(--disp);font-weight:600;font-size:20px;color:var(--indigo);}
+
+  footer{border-top:1px solid var(--line);padding:34px 0;color:var(--faint);font-size:14px;}
+  .foot{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+  .foot a{color:var(--muted);}.foot a:hover{color:var(--indigo);}
+  @media(prefers-reduced-motion:reduce){.reveal{animation:none;opacity:1;transform:none;}}
+</style>
+</head>
+<body>
+<script>
+  function mark(sz){return '<svg viewBox="0 0 48 48" width="'+sz+'" height="'+sz+'" aria-hidden="true"><rect width="48" height="48" rx="13" fill="#3B3FD6"/><path d="M15 16l8 8-8 8" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M25 16l8 8-8 8" fill="none" stroke="#BFC2FF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';}
+</script>
+
+<nav><div class="wrap row">
+  <div class="brand"><span id="navmark"></span>ShiftForge</div>
+  <div class="navlinks">
+    <a href="#work">Work</a>
+    <a href="#approach">Approach</a>
+    <a class="navcta" href="#contact">Get in touch</a>
+  </div>
+</div></nav>
+
+<header class="wrap hero">
+  <span class="eyebrow reveal">Independent software studio · Bengaluru</span>
+  <h1 class="reveal d1">Fair, honest software for everyday life.</h1>
+  <p class="reveal d2">ShiftForge builds small, useful tools that make sharing — a home, a workload, a family's week — feel fair, and stay honest about how they work. Made with care, in the open.</p>
+  <div class="cta reveal d3">
+    <a class="btn btn-primary" href="#work">See the work</a>
+    <a class="btn btn-ghost" href="mailto:hello@shiftforge.net?subject=FairRota%20early%20access">Request early access</a>
+  </div>
+</header>
+
+<section id="work"><div class="wrap">
+  <div class="kicker">The work</div>
+  <h2 class="sec-h">Tools, made to be fair</h2>
+  <p class="lead">Each one solves a real, everyday coordination problem — properly, not with dark patterns.</p>
+
+  <div class="project">
+    <div class="info">
+      <div class="ptag">LIVE · IN TESTING</div>
+      <h3>FairRota</h3>
+      <div class="tagline">Share the housework so it's fair — and stays fair.</div>
+      <p>Splits chores by real effort and keeps a running balance, so the load evens out on its own. Built for flatmates, families, and parents and teens.</p>
+      <!-- EARLY ACCESS: swap back to  <a href="https://fairrota.shiftforge.net">Open the app &rarr;</a>  once the Google app is published -->
+      <div class="plinks"><a href="mailto:hello@shiftforge.net?subject=FairRota%20early%20access">Request early access &rarr;</a></div>
+    </div>
+    <div class="pvisual" aria-hidden="true">
+      <div class="pv-h">This week's balance</div>
+      <div class="brow"><span class="bn">Ravi</span><span class="bt"><span class="fl"></span><span class="bf" style="width:100%;background:var(--rested)"></span></span><span class="bl" style="color:var(--rested)">owed a break</span></div>
+      <div class="brow"><span class="bn">Meera</span><span class="bt"><span class="fl"></span><span class="bf" style="width:60%;background:var(--pine)"></span></span><span class="bl" style="color:#53605A">fair</span></div>
+      <div class="brow"><span class="bn">Sam</span><span class="bt"><span class="fl"></span><span class="bf" style="width:34%;background:var(--owe)"></span></span><span class="bl" style="color:#6F4711">owes a bit</span></div>
+    </div>
+  </div>
+
+  <div class="more">More tools are in the forge. If there's an everyday coordination problem you wish someone would solve well, <a href="#contact" style="color:var(--indigo);font-weight:600;">get in touch</a>.</div>
+</div></section>
+
+<section id="approach"><div class="wrap">
+  <div class="kicker">Approach</div>
+  <h2 class="sec-h">How it is built</h2>
+  <p class="lead">Three rules everything here is held to.</p>
+  <div class="approach">
+    <div class="ap"><h3><span>Fair</span> by design</h3><p>The software works for you, not on you — no manipulation, no engagement traps. Fairness is the feature.</p></div>
+    <div class="ap"><h3><span>Small</span> and sharp</h3><p>One real problem, solved well, beats a bloated suite that does ten things badly. Light enough to use every day.</p></div>
+    <div class="ap"><h3><span>Honest</span> about the deal</h3><p>Plain about what a tool does, what it doesn't, and what it costs. No surprises after you've committed.</p></div>
+  </div>
+</div></section>
+
+
+<section id="contact"><div class="wrap">
+  <div class="contact">
+    <h2>Let's talk</h2>
+    <p>Want to try the work, share an everyday problem worth solving, or just say hello? Every message gets read.</p>
+    <a class="mail" href="mailto:hello@shiftforge.net">hello@shiftforge.net</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap foot">
+  <div>© 2026 ShiftForge — made in India.</div>
+  <div><a href="https://fairrota.shiftforge.net">FairRota</a> &nbsp;·&nbsp; <a href="mailto:hello@shiftforge.net">hello@shiftforge.net</a></div>
+</div></footer>
+
+<script>
+  document.getElementById('navmark').innerHTML=mark(28);
+</script>
+</body>
+</html>
