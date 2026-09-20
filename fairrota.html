@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FairRota — share the housework, fairly</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCI+PHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiByeD0iMTIiIGZpbGw9IiMxMjUxMkYiLz48cmVjdCB4PSI5IiB5PSIxNSIgd2lkdGg9IjI2IiBoZWlnaHQ9IjYiIHJ4PSIzIiBmaWxsPSIjRUJFRkU2Ii8+PHJlY3QgeD0iOSIgeT0iMjciIHdpZHRoPSIxNyIgaGVpZ2h0PSI2IiByeD0iMyIgZmlsbD0iIzhGQzlCMCIvPjxsaW5lIHgxPSIyNCIgeTE9IjEwIiB4Mj0iMjQiIHkyPSIzOCIgc3Ryb2tlPSIjRjJBNjNDIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+">
+<meta name="description" content="FairRota splits household chores by real effort and keeps a running balance, so sharing the load stays fair — for flatmates, families, and parents and teens.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+  :root{
+    --paper:#EBEFE6;--surface:#FCFDFB;--sunk:#EEF2EA;--ink:#16231C;--soft:#53605A;--faint:#8A948C;--line:#DCE3D6;
+    --pine:#1E6B47;--pine-deep:#12512F;--pine-wash:#E3EEE7;--rested:#2C8577;--owe:#B4761E;--owe-ink:#6F4711;
+    --disp:'Fraunces',Georgia,serif;--body:'Plus Jakarta Sans',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px;}
+  a{color:inherit;}
+  .btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--body);font-weight:700;font-size:15px;border-radius:12px;padding:13px 22px;text-decoration:none;border:1.5px solid transparent;cursor:pointer;transition:.15s;}
+  .btn-pine{background:var(--pine);color:#fff;}.btn-pine:hover{background:var(--pine-deep);}
+  .btn-ghost{border-color:var(--line);color:var(--ink);background:var(--surface);}.btn-ghost:hover{border-color:var(--faint);}
+
+  nav{position:sticky;top:0;z-index:10;background:rgba(235,239,230,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  nav .row{display:flex;align-items:center;justify-content:space-between;height:66px;}
+  .brand{display:flex;align-items:center;gap:11px;font-family:var(--disp);font-weight:600;font-size:22px;color:var(--pine-deep);letter-spacing:-.01em;}
+
+  .hero{padding:76px 0 60px;display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;}
+  @media(max-width:800px){.hero{grid-template-columns:1fr;gap:34px;padding:48px 0 40px;}}
+  .hero h1{font-family:var(--disp);font-weight:600;font-size:clamp(34px,5.6vw,54px);line-height:1.05;letter-spacing:-.02em;margin-bottom:18px;}
+  .hero p{font-size:clamp(16px,2.1vw,19px);color:var(--soft);max-width:52ch;margin-bottom:26px;}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+  .cta .note{font-size:13px;color:var(--faint);}
+
+  /* balance visual */
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 20px 50px -30px rgba(20,60,40,.5);}
+  .panel-h{font-family:var(--disp);font-weight:600;font-size:18px;color:var(--pine-deep);margin-bottom:18px;}
+  .brow{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
+  .bn{width:60px;font-size:14px;font-weight:700;flex:0 0 auto;}
+  .bt{position:relative;flex:1;height:16px;background:var(--sunk);border-radius:99px;overflow:hidden;}
+  .bf{height:100%;border-radius:99px;}
+  .fairline{position:absolute;top:-3px;bottom:-3px;left:58%;width:2px;background:var(--ink);opacity:.25;}
+  .bl{width:88px;text-align:right;font-size:12px;font-weight:700;flex:0 0 auto;}
+  .verdict{background:var(--pine-wash);color:var(--pine-deep);border-radius:12px;padding:11px 14px;font-size:14px;font-weight:500;margin-top:6px;}
+
+  section{padding:56px 0;border-top:1px solid var(--line);}
+  .kicker{color:var(--pine);font-weight:700;font-size:14px;margin-bottom:10px;}
+  .sec-h{font-family:var(--disp);font-weight:600;font-size:clamp(24px,3.6vw,32px);letter-spacing:-.01em;margin-bottom:12px;}
+  .lead{color:var(--soft);font-size:17px;max-width:60ch;margin-bottom:36px;}
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  @media(max-width:760px){.steps{grid-template-columns:1fr;gap:20px;}}
+  .step h3{font-family:var(--disp);font-weight:600;font-size:19px;margin:8px 0 6px;}
+  .step p{color:var(--soft);font-size:15px;}
+  .num{width:34px;height:34px;border-radius:10px;background:var(--pine-wash);color:var(--pine-deep);font-weight:800;display:flex;align-items:center;justify-content:center;}
+
+  .who{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  @media(max-width:680px){.who{grid-template-columns:1fr;}}
+  .whocard{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;}
+  .whocard h3{font-family:var(--disp);font-weight:600;font-size:18px;margin-bottom:6px;}
+  .whocard p{color:var(--soft);font-size:15px;}
+  .whocard.accent{background:var(--pine-wash);border-color:transparent;}
+
+  .try{text-align:center;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:44px 24px;}
+  .try h2{font-family:var(--disp);font-weight:600;font-size:clamp(24px,4vw,34px);margin-bottom:12px;letter-spacing:-.01em;}
+  .try p{color:var(--soft);font-size:16px;max-width:52ch;margin:0 auto 24px;}
+
+  footer{border-top:1px solid var(--line);padding:34px 0;color:var(--faint);font-size:14px;}
+  .foot{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+  .foot a{color:var(--soft);text-decoration:none;}.foot a:hover{color:var(--pine);}
+</style>
+</head>
+<body>
+<script>
+  function logo(sz){return '<svg viewBox="0 0 48 48" width="'+sz+'" height="'+sz+'" aria-hidden="true"><rect width="48" height="48" rx="12" fill="#12512F"/><rect x="9" y="15" width="26" height="6" rx="3" fill="#EBEFE6"/><rect x="9" y="27" width="17" height="6" rx="3" fill="#8FC9B0"/><line x1="24" y1="10" x2="24" y2="38" stroke="#F2A63C" stroke-width="2.5" stroke-linecap="round"/></svg>';}
+</script>
+
+<nav><div class="wrap row">
+  <div class="brand"><span id="navlogo"></span>FairRota</div>
+  <div style="display:flex;align-items:center;gap:18px;"><a href="/" style="color:var(--muted);text-decoration:none;font-weight:600;font-size:15px;">ShiftForge</a><a class="btn btn-pine" href="mailto:hello@shiftforge.net?subject=FairRota%20early%20access">Request access</a></div>
+</div></nav>
+
+<header class="wrap hero">
+  <div>
+    <h1>Share the housework so it's fair — and stays fair.</h1>
+    <p>FairRota splits chores by real effort and keeps a running balance, so the load evens out on its own. No one hands jobs to anyone. The rota does it.</p>
+    <div class="cta">
+      <a class="btn btn-pine" href="mailto:hello@shiftforge.net?subject=FairRota%20early%20access">Request early access</a>
+      <a class="btn btn-ghost" href="#how">See how it works</a>
+      <span class="note">Free · invite-only early access</span>
+    </div>
+  </div>
+  <div class="panel" aria-hidden="true">
+    <div class="panel-h">This week's balance</div>
+    <div class="brow"><span class="bn">Ravi</span><span class="bt"><span class="fairline"></span><span class="bf" style="width:100%;background:var(--rested)"></span></span><span class="bl" style="color:var(--rested)">owed a break</span></div>
+    <div class="brow"><span class="bn">Meera</span><span class="bt"><span class="fairline"></span><span class="bf" style="width:60%;background:var(--pine)"></span></span><span class="bl" style="color:var(--soft)">fair</span></div>
+    <div class="brow"><span class="bn">Sam</span><span class="bt"><span class="fairline"></span><span class="bf" style="width:34%;background:var(--owe)"></span></span><span class="bl" style="color:var(--owe-ink)">owes a bit</span></div>
+    <div class="verdict">Ravi is owed a break; Sam is due the heavier jobs next. It evens out over the weeks.</div>
+  </div>
+</header>
+
+<section id="how"><div class="wrap">
+  <div class="kicker">How it works</div>
+  <h2 class="sec-h">Fair by design, not by argument</h2>
+  <p class="lead">Three simple ideas do all the work.</p>
+  <div class="steps">
+    <div class="step"><div class="num">1</div><h3>Shared by effort</h3><p>Every chore has an effort weight. The app shares them out so no one quietly carries more than their share.</p></div>
+    <div class="step"><div class="num">2</div><h3>Do your jobs</h3><p>Pick a day, accept it, and mark it done when finished. Fixed-day jobs (like bins on Tuesday) are covered too.</p></div>
+    <div class="step"><div class="num">3</div><h3>It evens out</h3><p>Do more one week and you're owed a break the next. The balance carries forward, so fairness lasts.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="kicker">Who it's for</div>
+  <h2 class="sec-h">Any home that shares a to-do list</h2>
+  <p class="lead">If more than one person is responsible for keeping a place running, FairRota keeps it even.</p>
+  <div class="who">
+    <div class="whocard"><h3>Flatmates &amp; shared houses</h3><p>End the silent scorekeeping. Everyone can see the balance, so it never comes down to who shouts loudest.</p></div>
+    <div class="whocard"><h3>Families &amp; couples</h3><p>Split the real load of running a home fairly, week after week, without nagging or spreadsheets.</p></div>
+    <div class="whocard accent"><h3>Parents &amp; teens</h3><p>It isn't only chores. Assign study, practice, or sport to kids with a phone — a fair, visible task board the whole family shares.</p></div>
+    <div class="whocard"><h3>Anyone sharing a space</h3><p>Hostels, small teams, care rotas — wherever effort should be shared, the balance keeps it honest.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="try">
+    <h2>Join the early-access trial</h2>
+    <p>FairRota is in a private early-access trial right now. Request access and we'll set your household up — it's free and works on any phone, no install needed.</p>
+    <a class="btn btn-pine" href="mailto:hello@shiftforge.net?subject=FairRota%20early%20access">Request early access</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap foot">
+  <div>FairRota — a <b>ShiftForge</b> project. Made in India.</div>
+  <div><a href="mailto:hello@shiftforge.net?subject=FairRota%20early%20access">Request access</a> &nbsp;·&nbsp; <a href="mailto:hello@shiftforge.net">hello@shiftforge.net</a></div>
+</div></footer>
+
+<script>
+  document.getElementById('navlogo').innerHTML=logo(28);
+</script>
+</body>
+</html>
