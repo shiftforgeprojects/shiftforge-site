@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FairRota — share the housework, fairly</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCI+PHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiByeD0iMTIiIGZpbGw9IiMxMjUxMkYiLz48cmVjdCB4PSI5IiB5PSIxNSIgd2lkdGg9IjI2IiBoZWlnaHQ9IjYiIHJ4PSIzIiBmaWxsPSIjRUJFRkU2Ii8+PHJlY3QgeD0iOSIgeT0iMjciIHdpZHRoPSIxNyIgaGVpZ2h0PSI2IiByeD0iMyIgZmlsbD0iIzhGQzlCMCIvPjxsaW5lIHgxPSIyNCIgeTE9IjEwIiB4Mj0iMjQiIHkyPSIzOCIgc3Ryb2tlPSIjRjJBNjNDIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCI+PHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiByeD0iMTMiIGZpbGw9IiM0RjQ2RTUiLz48cmVjdCB4PSI5IiB5PSIxNSIgd2lkdGg9IjI2IiBoZWlnaHQ9IjYiIHJ4PSIzIiBmaWxsPSIjRkZGRkZGIi8+PHJlY3QgeD0iOSIgeT0iMjciIHdpZHRoPSIxNyIgaGVpZ2h0PSI2IiByeD0iMyIgZmlsbD0iI0M3RDJGRSIvPjxsaW5lIHgxPSIyNCIgeTE9IjEwIiB4Mj0iMjQiIHkyPSIzOCIgc3Ryb2tlPSIjRjU5RTBCIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+">
 <meta name="description" content="FairRota splits household chores by real effort and keeps a running balance, so sharing the load stays fair — for flatmates, families, and parents and teens.">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
   :root{
-    --paper:#EBEFE6;--surface:#FCFDFB;--sunk:#EEF2EA;--ink:#16231C;--soft:#53605A;--faint:#8A948C;--line:#DCE3D6;
-    --pine:#1E6B47;--pine-deep:#12512F;--pine-wash:#E3EEE7;--rested:#2C8577;--owe:#B4761E;--owe-ink:#6F4711;
+    --paper:#F5F6FA;--surface:#FFFFFF;--sunk:#EEF0F6;--ink:#1B1D2A;--soft:#5B6072;--faint:#9297A6;--line:#E4E7F0;
+    --pine:#4F46E5;--pine-deep:#3730A3;--pine-wash:#ECEEFF;--rested:#0D9488;--owe:#D97706;--owe-ink:#92400E;
     --disp:'Fraunces',Georgia,serif;--body:'Plus Jakarta Sans',system-ui,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -22,7 +22,7 @@
   .btn-pine{background:var(--pine);color:#fff;}.btn-pine:hover{background:var(--pine-deep);}
   .btn-ghost{border-color:var(--line);color:var(--ink);background:var(--surface);}.btn-ghost:hover{border-color:var(--faint);}
 
-  nav{position:sticky;top:0;z-index:10;background:rgba(235,239,230,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  nav{position:sticky;top:0;z-index:10;background:rgba(245,246,250,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
   nav .row{display:flex;align-items:center;justify-content:space-between;height:66px;}
   .brand{display:flex;align-items:center;gap:11px;font-family:var(--disp);font-weight:600;font-size:22px;color:var(--pine-deep);letter-spacing:-.01em;}
 
@@ -73,12 +73,12 @@
 </head>
 <body>
 <script>
-  function logo(sz){return '<svg viewBox="0 0 48 48" width="'+sz+'" height="'+sz+'" aria-hidden="true"><rect width="48" height="48" rx="12" fill="#12512F"/><rect x="9" y="15" width="26" height="6" rx="3" fill="#EBEFE6"/><rect x="9" y="27" width="17" height="6" rx="3" fill="#8FC9B0"/><line x1="24" y1="10" x2="24" y2="38" stroke="#F2A63C" stroke-width="2.5" stroke-linecap="round"/></svg>';}
+  function logo(sz){return '<svg viewBox="0 0 48 48" width="'+sz+'" height="'+sz+'" aria-hidden="true"><rect width="48" height="48" rx="13" fill="#4F46E5"/><rect x="9" y="15" width="26" height="6" rx="3" fill="#FFFFFF"/><rect x="9" y="27" width="17" height="6" rx="3" fill="#C7D2FE"/><line x1="24" y1="10" x2="24" y2="38" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round"/></svg>';}
 </script>
 
 <nav><div class="wrap row">
   <div class="brand"><span id="navlogo"></span>FairRota</div>
-  <div style="display:flex;align-items:center;gap:18px;"><a href="/" style="color:var(--muted);text-decoration:none;font-weight:600;font-size:15px;">ShiftForge</a><a class="btn btn-pine" href="mailto:hello@shiftforge.net?subject=FairRota%20early%20access">Request access</a></div>
+  <div style="display:flex;align-items:center;gap:18px;"><a href="/" style="color:var(--soft);text-decoration:none;font-weight:600;font-size:15px;">ShiftForge</a><a class="btn btn-pine" href="mailto:hello@shiftforge.net?subject=FairRota%20early%20access">Request access</a></div>
 </div></nav>
 
 <header class="wrap hero">
@@ -106,7 +106,7 @@
   <p class="lead">Three simple ideas do all the work.</p>
   <div class="steps">
     <div class="step"><div class="num">1</div><h3>Shared by effort</h3><p>Every chore has an effort weight. The app shares them out so no one quietly carries more than their share.</p></div>
-    <div class="step"><div class="num">2</div><h3>Do your jobs</h3><p>Pick a day, accept it, and mark it done when finished. Fixed-day jobs (like bins on Tuesday) are covered too.</p></div>
+    <div class="step"><div class="num">2</div><h3>Your week, at a glance</h3><p>A tappable Mon–Sun rota. Tap any day to see what you're on, add a chore to it in one tap, and mark it done. Fixed-day jobs (like bins on Tuesday) sit right where they belong.</p></div>
     <div class="step"><div class="num">3</div><h3>It evens out</h3><p>Do more one week and you're owed a break the next. The balance carries forward, so fairness lasts.</p></div>
   </div>
 </div></section>
